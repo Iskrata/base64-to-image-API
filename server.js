@@ -5,7 +5,7 @@ md5 = require('js-md5');
 const app = express();  
 app.use(express.static('data/images'));
 
-const port = 8000;
+const port = 80;
 
 //require('./app/routes')(app, {});
 app.use(bodyParser.urlencoded( { extended: true } ))
