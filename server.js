@@ -11,10 +11,10 @@ const port = 8000;
 app.use(bodyParser.urlencoded( { extended: true } ))
 
 app.post('/', (req, res) => {
-    let data = req.body.image.toString();
-    let commaPos = data.search(",");
-    let base64Data = data.substring(commaPos+1);
-    let hash = md5(base64Data);
+    let hash = req.body.image.toString();
+    // let commaPos = data.search(",");
+    // let base64Data = data.substring(commaPos+1);
+    // let hash = md5(base64Data);
     require("fs").writeFile('./data/images/'+hash+'.png', base64Data, 'base64', function(err) {
     //console.log(err);
     });
