@@ -7,7 +7,6 @@ app.use(express.static('data/images'));
 
 const port = 80;
 
-//require('./app/routes')(app, {});
 app.use(bodyParser.urlencoded( { extended: true } ))
 
 app.post('/', (req, res) => {
@@ -15,12 +14,15 @@ app.post('/', (req, res) => {
     let commaPos = data.search(",");
     let base64Data = data.substring(commaPos+1);
     let hash = md5(base64Data);
-    require("fs").writeFile('./data/images/'+hash+'.png', base64Data, 'base64', function(err) {
-    //console.log(err);
+    let hashFile = '/' + hash + '.png'
+    require("fs").writeFile('./data/images' + hashFile, base64Data, 'base64', function(err) {
+        if (err != null){
+            console.log(`Generated ${hashFile}`);
+        }else{
+            console.log(err);
+        }
     });
-
-    //console.log(req.body);
-    res.send('/'+hash+'.png');
+    res.send(hashFile);
 })
 
 app.listen(port, () => {
